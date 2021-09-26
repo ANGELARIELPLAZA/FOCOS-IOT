@@ -1,0 +1,22 @@
+{
+  "usuarios": [
+      {
+          "id":1,
+          "apellido_paterno": "Plaza",
+          "apellido_materno": "Acuna",
+          "nombre": "Angel",
+          "username": "Ariel",
+          "password": "827ccb0eea8a706c4c34a16891f84e7b"
+
+      },
+      {
+        "id":0,
+        "apellido_paterno": " ",
+        "apellido_materno": " ",
+        "nombre": "master",
+        "username": "master",
+        "password": "827ccb0eea8a706c4c34a16891f84e7b"
+
+    }
+  ]
+}
