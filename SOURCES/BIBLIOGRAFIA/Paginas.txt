@@ -1,0 +1,15 @@
+datasheet:
+esp8266:     https://programarfacil.com/wp-content/uploads/2017/01/pines-esp01.png
+nodemecu:    https://th.bing.com/th/id/OIP.roNLg3beOrfhWBRTVHOfsgHaER?pid=ImgDet&rs=1
+raspberry 3: https://rumahhijabaqila.com/img/887781.jpghttps://rumahhijabaqila.com/img/887781.jpg
+
+
+modo AP:
+https://www.bing.com/videos/search?q=esp8266+wifi+server&docid=607986168898070392&mid=4A03BD26A48EA1DD6E284A03BD26A48EA1DD6E28&view=detail&FORM=VIRE
+
+Puertos TCP:
+https://www.redeszone.net/tutoriales/configuracion-puertos/puertos-tcp-udp/
+Peticiones  y Respuestas HTTP:
+https://developer.mozilla.org/es/docs...
+Códigos de estado HTTP:
+https://developer.mozilla.org/es/docs...
