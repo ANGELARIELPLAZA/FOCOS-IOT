@@ -7,7 +7,8 @@ function App() {
       <header className="App-header">
       
        <div className="child">
-        <code>justify-content: center;<br />align-items: center;</code>
+        <code>TEMPERATURA:  35.6
+        <br /> PUEDE PASAR</code>
       </div>
 
       </header>

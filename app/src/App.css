@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #60e0b0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,6 +37,8 @@
   }
 }
 .child {
-  background: #60e0b0;
-  padding: .2rem;
+  background: #282c34;
+  padding: 3rem;
+  font-size: larger;
+  border-radius:  2rem 2rem;
 }
