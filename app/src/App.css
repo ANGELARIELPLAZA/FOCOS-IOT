@@ -39,6 +39,6 @@
 .child {
   background: #282c34;
   padding: 3rem;
-  font-size: larger;
+  font-size:-webkit-xxx-large ;
   border-radius:  2rem 2rem;
 }
