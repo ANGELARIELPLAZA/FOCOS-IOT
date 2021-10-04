@@ -7,8 +7,8 @@ function App() {
       <header className="App-header">
       
        <div className="child">
-        <code>TEMPERATURA:  35.6
-        <br /> PUEDE PASAR</code>
+        <code>TEMPERATURA:  37.2
+        <br /> NO PUEDE PASAR</code>
       </div>
 
       </header>
