@@ -14,8 +14,7 @@ mqtt = Mqtt(app)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
-
+    return render_template('index.html')
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
