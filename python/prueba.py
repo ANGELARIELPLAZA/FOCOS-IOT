@@ -41,6 +41,7 @@ def handle_publish(json_str):
 def handle_subscribe(json_str):
     data = json.loads(json_str)
     mqtt.subscribe(data['outTopic'])
+    print(data)
 
 
 @socketio.on('unsubscribe_all')
