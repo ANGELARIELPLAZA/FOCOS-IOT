@@ -1,5 +1,4 @@
 import os
-import time
 from flask import Flask, render_template, redirect, flash, request, url_for
 from datetime import timedelta, datetime
 from time import time
@@ -20,9 +19,8 @@ def hello_world():
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    print('on_connect client : {} userdata :{} flags :{} rc:{}'.format(client, userdata, flags, rc))
+    print('on_connect client : {} userdata'.format(client))
     mqtt.subscribe("outTopic")
-    time.sleep(3)
 
 
 @mqtt.on_subscribe()
