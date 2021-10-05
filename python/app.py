@@ -147,7 +147,7 @@ def main():
    # Pass the template data into the template main.html and 	return it to the user
    return render_template('index.html')
 
-client.subscribe("outTopic")
+mqtt.subscribe("outTopic")
 
 
     
