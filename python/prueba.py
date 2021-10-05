@@ -22,9 +22,9 @@ def handle_connect(client, userdata, flags, rc):
     print('on_connect client : {} userdata :{} flags :{} rc:{}'.format(client, userdata, flags, rc))
     mqtt.subscribe("outTopic")
 
-#@mqtt.on_subscribe()
-#def handle_subscribe(client, userdata, mid, granted_qos):
-#    print('on_subscribe client : {} userdata :{} mid :{} granted_qos:{}'.format(client, userdata, mid, granted_qos))
+@mqtt.on_subscribe()
+def handle_subscribe(client, userdata, mid, granted_qos):
+    print('on_subscribe client : {} userdata :{} mid :{} granted_qos:{}'.format(client, userdata, mid, granted_qos))
 
 
 @mqtt.on_message()
