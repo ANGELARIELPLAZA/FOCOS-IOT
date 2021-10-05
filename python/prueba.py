@@ -1,49 +1,19 @@
-"""
-Python MQTT Subscription client - No Username/Password
-Thomas Varnish (https://github.com/tvarnish), (https://www.instructables.com/member/Tango172)
-Written for my Instructable - "How to use MQTT with the Raspberry Pi and ESP8266"
-"""
+
 import paho.mqtt.client as mqtt
-from flask import Flask, render_template, request
-app = Flask(__name__)
-
-mqtt = mqtt.Client()
-mqtt.connect("localhost", 1883, 60)
-mqtt.loop_start()
-topic1 = "mesa1"  # Mesa 1
 
 
-
-@app.route("/", methods=["GET", "POST"])
-def main():
-   datos = request.form.to_dict(flat=True)
-   print(datos)
-   #########################################
-   valores1 = datos.get("mesa1")
-   # Convierte  en string y busca el elemento dentro del diccionario
-   # print(valores1)
-   # Convierte  en string y busca el elemento dentro del diccionario
-
-#########################################
-   # MESA 1
-   if valores1 == 'ON':
-       dato = 1
-       if dato == 1:
-           color = datos.get("color")
-           print(color)
-           if color == '#ff0000':  # color rojo
-                mqtt.publish(topic1, 1)
-           
-
-   if valores1 == 'OFF':
-        mqtt.publish(topic1, 0)
-
-   # Pass the template data into the template main.html and     return it to the user
-   return render_template('index.html')
-
-mqtt.subscribe("outTopic")
+def on_connect(client, userdata, flags, rc):  # The callback for when the client connects to the broker
+    print("Connected with result code {0}".format(str(rc)))  # Print result of connection attempt
+    client.subscribe("outTopic")  # Subscribe to the topic “digitest/test1”, receive any messages published on it
 
 
-    
-if __name__ == '__main__':
-   app.run(host='0.0.0.0', port=8181, debug=True)
+def on_message(client, userdata, msg):  # The callback for when a PUBLISH message is received from the server.
+    print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
+
+
+client = mqtt.Client()  # Create instance of client with client ID “digi_mqtt_test”
+client.on_connect = on_connect  # Define callback function for successful connection
+client.on_message = on_message  # Define callback function for receipt of a message
+# client.connect("m2m.eclipse.org", 1883, 60)  # Connect to (broker, port, keepalive-time)
+client.connect("localhost", 1883, 60)
+client.loop_forever()  # Start networking daemon
