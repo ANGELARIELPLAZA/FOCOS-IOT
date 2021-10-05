@@ -12,6 +12,11 @@ app.config['MQTT_KEEPALIVE'] =20
 
 mqtt = Mqtt(app)
 
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     print('on_connect client : {} userdata :{} flags :{} rc:{}'.format(client, userdata, flags, rc))
@@ -36,4 +41,5 @@ def handle_disconnect(client, userdata, rc):
 def handle_logging(client, userdata, level, buf):
     print(level, buf)
 
-app.run(port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
