@@ -49,6 +49,16 @@
                 <h1 class="sensor2">Sensor :</h1>
             </div>
             <br>
+            <div class="col-5 jumbotron p-2 mx-1">
+                <h1 class="sensor3"> Sensor : </h1>
+            </div>
+            <br>
+
+            <div class="col-5 jumbotron p-2 mx-1">
+                <h1 class="sensor4">Sensor :</h1>
+            </div>
+            <br>
+
 
 
 
@@ -58,8 +68,8 @@
     <style>
 
         .jumbotron{
-            widows: 100px;
-            height: 100px;
+            widows: 50px;
+            height: 50px;
             justify-content: center;
         }
 
@@ -128,10 +138,16 @@
                 chartTemperatue.series[0].addPoint(data1, true, shiftTemperature);
                 chartHumidity.series[0].addPoint(data2, true, shiftHumidity);
                 $(".sensor1").text("");
-                $(".sensor1").text("Temperature : " +  Math.round(data1[1]) );
+                $(".sensor1").text("Temperature : " +  Math.round(data1[1]) +" °C" );
 
                 $(".sensor2").text("");
                 $(".sensor2").text("Humidity : " +  Math.round(data2[1]) );
+
+                $(".sensor3").text("");
+                $(".sensor3").text("pH : " +  Math.round(data1[1]) );
+
+                $(".sensor4").text("");
+                $(".sensor4").text("Nivel del agua : " +  80 +" %" );
 
                 // call it again after one second
                 setTimeout(requestData, 2000);
