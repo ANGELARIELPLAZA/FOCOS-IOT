@@ -91,7 +91,6 @@ void reconnect() {
 {
   return minf + random(1UL << 31) * (maxf - minf) / (1UL << 31);  // use 1ULL<<63 for max double values)
 }
-
 void loop() {
  
   if (!client.connected()) {
@@ -108,14 +107,15 @@ void loop() {
       float temp3 = randomDouble(35.00, 39.00);
          
     snprintf (msg1, 100,"TEMP #%4.2f", temp1);
-    snprintf (msg2, 75, "HUMEDAD #%4.2f", temp1);
-    snprintf (msg3, 75, "OXIGENACION #%4.2f", temp1);
+    snprintf (msg2, 100, "HUMEDAD #%4.2f", temp2);
+    snprintf (msg3, 100, "OXIGENACION #%4.2f", temp3);
 
     Serial.println("Publish message: ");
     Serial.println(msg1);
     Serial.println(msg2);
     Serial.println(msg3);
     Serial.println(" ");
+
     
     client.publish("outTopic", msg1);
     client.publish("outTopic", msg2);
