@@ -23,10 +23,10 @@ def handle_subscribe(client, userdata, mid, granted_qos):
     print('on_subscribe client : {} userdata :{} mid :{} granted_qos:{}'.format(client, userdata, mid, granted_qos))
 
 
-@mqtt.on_message()
-def handle_message(client, userdata, message):
-    print('on_message client : {} userdata :{} message.topic :{} message.payload :{}'.format(
-        client, userdata, message.topic, message.payload.decode()))
+#@mqtt.on_message()
+#def handle_message(client, userdata, message):
+#    print('on_message client : {} userdata :{} message.topic :{} message.payload :{}'.format(
+#        client, userdata, message.topic, message.payload.decode()))
 
 @mqtt.on_disconnect()
 def handle_disconnect(client, userdata, rc):
