@@ -1,6 +1,6 @@
 
 import paho.mqtt.client as mqtt
-from flask import Flask
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -27,4 +27,4 @@ client.loop_forever()  # Start networking daemon
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=8181, debug=True)
