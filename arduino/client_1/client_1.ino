@@ -9,8 +9,14 @@ const char* mqtt_server   = "192.168.0.13";    // IP adress Raspberry Pi
 WiFiClient espClient;
 PubSubClient client(espClient);
 long lastMsg = 0;
-char msg[50];
+char msg1[50];
+char msg2[50];
+char msg3[50];
+
 int value = 0;
+
+
+char message[100];
  
 void setup() {
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
@@ -81,7 +87,11 @@ void reconnect() {
     }
   }
 }
- 
+ double randomDouble(double minf, double maxf)
+{
+  return minf + random(1UL << 31) * (maxf - minf) / (1UL << 31);  // use 1ULL<<63 for max double values)
+}
+
 void loop() {
  
   if (!client.connected()) {
@@ -90,12 +100,25 @@ void loop() {
   client.loop();
  
   long now = millis();
-  if (now - lastMsg > 2000) {
+  if (now - lastMsg > 4000) {
     lastMsg = now;
-    ++value;
-    snprintf (msg, 75, "hello world #%ld", value);
-    Serial.print("Publish message: ");
-    Serial.println(msg);
-    client.publish("outTopic", msg);
+
+  float temp1 = randomDouble(35.00, 39.00);
+    float temp2 = randomDouble(35.00, 39.00);
+      float temp3 = randomDouble(35.00, 39.00);
+         
+    snprintf (msg1, 100,"TEMP #%4.2f", temp1);
+    snprintf (msg2, 75, "HUMEDAD #%4.2f", temp1);
+    snprintf (msg3, 75, "OXIGENACION #%4.2f", temp1);
+
+    Serial.println("Publish message: ");
+    Serial.println(msg1);
+    Serial.println(msg2);
+    Serial.println(msg3);
+    Serial.println(" ");
+    
+    client.publish("outTopic", msg1);
+    client.publish("outTopic", msg2);
+    client.publish("outTopic", msg3);
   }
 }
