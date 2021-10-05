@@ -1,30 +1,32 @@
-
-import paho.mqtt.client as mqtt
 from flask import Flask
+import paho.mqtt.client as mqtt
 
 app = Flask(__name__)
 
+topic = 'outTopic'
+topic2 = 'mesa1'
+port = 3000
+
+def on_connect(client, userdata, rc):
+    client.subscribe(topic)
+    client.publish(topic2, "STARTING SERVER")
+    client.publish(topic2, "CONNECTED")
+
+
+def on_message(client, userdata, msg):
+    client.publish(topic2, "MESSAGE")
+
+
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
-
-def on_connect(client, userdata, flags, rc):  # The callback for when the client connects to the broker
-    print("Connected with result code {0}".format(str(rc)))  # Print result of connection attempt
-    client.subscribe("outTopic")  # Subscribe to the topic “digitest/test1”, receive any messages published on it
-
-
-def on_message(client, userdata, msg):  # The callback for when a PUBLISH message is received from the server.
-    print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
-    print("")  # Print a received msg
-
-
-client = mqtt.Client()  # Create instance of client with client ID “digi_mqtt_test”
-client.on_connect = on_connect  # Define callback function for successful connection
-client.on_message = on_message  # Define callback function for receipt of a message
-# client.connect("m2m.eclipse.org", 1883, 60)  # Connect to (broker, port, keepalive-time)
-client.connect("localhost", 1883, 60)
-client.loop_forever()  # Start networking daemon
-
+    return 'Hello World! I am running on port ' + str(port)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8181, debug=True)
+    client = mqtt.Client()
+    #client.username_pw_set(username, password)
+    client.on_connect = on_connect
+    client.on_message = on_message
+    client.connect('localhost')
+    client.loop_start()
+
+    app.run(host='0.0.0.0', port=port)
