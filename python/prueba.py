@@ -21,6 +21,7 @@ def hello_world():
 def handle_connect(client, userdata, flags, rc):
     print('on_connect client : {} userdata :{} flags :{} rc:{}'.format(client, userdata, flags, rc))
     mqtt.subscribe("outTopic")
+    mqtt.subscribe("DEAHT")
 
 @mqtt.on_subscribe()
 def handle_subscribe(client, userdata, mid, granted_qos):

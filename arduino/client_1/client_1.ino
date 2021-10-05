@@ -99,7 +99,7 @@ void loop() {
   client.loop();
  
   long now = millis();
-  if (now - lastMsg > 9000) {
+  if (now - lastMsg > 1000) {
     lastMsg = now;
 
   float temp1 = randomDouble(35.00, 39.00);
