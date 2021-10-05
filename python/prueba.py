@@ -8,7 +8,7 @@ from flask_mqtt import Mqtt
 app = Flask(__name__)
 app.config['MQTT_BROKER_URL'] = "localhost"
 app.config['MQTT_BROKER_PORT'] = 1883
-app.config['MQTT_KEEPALIVE'] =20
+app.config['MQTT_KEEPALIVE'] =40
 
 mqtt = Mqtt(app)
 
