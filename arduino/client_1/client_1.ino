@@ -1,6 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-
+//http://arduino.esp8266.com/stable/package_esp8266com_index.json
 // Change the credentials below, so your ESP8266 connects to your router
 const char* ssid          = "IZZI-9146";      // RED DE INTERNET
 const char* password      = "F82DC0169146";   // CONTRASEÑA
