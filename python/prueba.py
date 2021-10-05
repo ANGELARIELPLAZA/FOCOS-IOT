@@ -3,6 +3,7 @@ import paho.mqtt.client as mqtt
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
+client = mqtt.Client()  # Create instance of client with client ID “digi_mqtt_test”
 client.connect("localhost", 1883, 60)
 
 
@@ -21,15 +22,16 @@ def on_message(client, userdata, msg):  # The callback for when a PUBLISH messag
 
 
 
-client = mqtt.Client()  # Create instance of client with client ID “digi_mqtt_test”
-client.on_connect = on_connect  # Define callback function for successful connection
-client.on_message = on_message  # Define callback function for receipt of a message
-# client.connect("m2m.eclipse.org", 1883, 60)  # Connect to (broker, port, keepalive-time)
+
+
 
 
 
 @app.route('/')
 def hello_world():
+    client.on_connect = on_connect  # Define callback function for successful connection
+    client.on_message = on_message  # Define callback function for receipt of a message
+    # client.connect("m2m.eclipse.org", 1883, 60)  # Connect to (broker, port, keepalive-time)
     return 'Hello World!'
 
 if __name__ == '__main__':
