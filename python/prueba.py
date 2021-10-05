@@ -19,7 +19,7 @@ def hello_world():
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    print('on_connect client : {} userdata'.format(client))
+    print('on_connect client : {} '.format(client))
     mqtt.subscribe("outTopic")
 
 
@@ -30,8 +30,7 @@ def handle_subscribe(client, userdata, mid, granted_qos):
 
 @mqtt.on_message()
 def handle_message(client, userdata, message):
-    print('on_message client : {} message.topic :{} message.payload :{}'.format(
-        client, message.topic, message.payload.decode()))
+    print('on_message client :  message.topic :{} message.payload :{}'.format(message.topic, message.payload.decode()))
 
 @mqtt.on_disconnect()
 def handle_disconnect(client, userdata, rc):
