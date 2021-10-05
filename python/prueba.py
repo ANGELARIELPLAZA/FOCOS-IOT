@@ -6,7 +6,7 @@ Written for my Instructable - "How to use MQTT with the Raspberry Pi and ESP8266
 import paho.mqtt.client as mqtt
 
 # Don't forget to change the variables for the MQTT broker!
-mqtt_topic = "mesa1"
+mqtt_topic = "outTopic"
 mqtt_broker_ip = "192.168.0.13"
 
 client = mqtt.Client()
