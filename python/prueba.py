@@ -4,41 +4,46 @@ Thomas Varnish (https://github.com/tvarnish), (https://www.instructables.com/mem
 Written for my Instructable - "How to use MQTT with the Raspberry Pi and ESP8266"
 """
 import paho.mqtt.client as mqtt
+from flask import Flask, render_template, request
+app = Flask(__name__)
 
-# Don't forget to change the variables for the MQTT broker!
-mqtt_topic = "outTopic"
-mqtt_broker_ip = "192.168.0.13"
+mqtt = mqtt.Client()
+mqtt.connect("localhost", 1883, 60)
+mqtt.loop_start()
+topic1 = "mesa1"  # Mesa 1
 
-client = mqtt.Client()
 
-# These functions handle what happens when the MQTT client connects
-# to the broker, and what happens then the topic receives a message
-def on_connect(client, userdata, flags, rc):
-    # rc is the error code returned when connecting to the broker
-    print "Connected!", str(rc)
+
+@app.route("/", methods=["GET", "POST"])
+def main():
+   datos = request.form.to_dict(flat=True)
+   print(datos)
+   #########################################
+   valores1 = datos.get("mesa1")
+   # Convierte  en string y busca el elemento dentro del diccionario
+   # print(valores1)
+   # Convierte  en string y busca el elemento dentro del diccionario
+
+#########################################
+   # MESA 1
+   if valores1 == 'ON':
+       dato = 1
+       if dato == 1:
+           color = datos.get("color")
+           print(color)
+           if color == '#ff0000':  # color rojo
+                mqtt.publish(topic1, 1)
+           
+
+   if valores1 == 'OFF':
+        mqtt.publish(topic1, 0)
+
+   # Pass the template data into the template main.html and     return it to the user
+   return render_template('index.html')
+
+mqtt.subscribe("outTopic")
+
+
     
-    # Once the client has connected to the broker, subscribe to the topic
-    client.subscribe(mqtt_topic)
-    
-def on_message(client, userdata, msg):
-    # This function is called everytime the topic is published to.
-    # If you want to check each message, and do something depending on
-    # the content, the code to do this should be run in this function
-    
-    print "Topic: ", msg.topic + "\nMessage: " + str(msg.payload)
-    
-    # The message itself is stored in the msg variable
-    # and details about who sent it are stored in userdata
-
-# Here, we are telling the client which functions are to be run
-# on connecting, and on receiving a message
-client.on_connect = on_connect
-client.on_message = on_message
-
-# Once everything has been set up, we can (finally) connect to the broker
-# 1883 is the listener port that the MQTT broker is using
-client.connect(mqtt_broker_ip, 1883)
-
-# Once we have told the client to connect, let the client object run itself
-client.loop_forever()
-client.disconnect()
+if __name__ == '__main__':
+   app.run(host='0.0.0.0', port=8181, debug=True)
