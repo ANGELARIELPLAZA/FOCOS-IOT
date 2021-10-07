@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, flash, request, url_for
 from datetime import timedelta, datetime
 from time import time
 from flask_mqtt import Mqtt
- 
+import mysql.connector
 
 app = Flask(__name__)
 app.config['MQTT_BROKER_URL'] = "localhost"
@@ -15,6 +15,11 @@ mqtt = Mqtt(app)
 @app.route('/')
 def hello_world():
     return 'Hello World!'
+
+conexion1=mysql.connector.connect(host="localhost", 
+                                  user="root", 
+                                  passwd="", 
+                                  database="data")
 
 
 @mqtt.on_connect()
@@ -31,6 +36,12 @@ def handle_subscribe(client, userdata, mid, granted_qos):
 @mqtt.on_message()
 def handle_message(client, userdata, message):
     print('on_message client :  message.topic :{} message.payload :{}'.format(message.topic, message.payload.decode()))
+    cursor1=conexion1.cursor()
+    sql="insert into esp32_dht11(sensor,temperature,humidity) values (%s,%s,%s)"
+    datos=(0, 25,78)
+    cursor1.execute(sql, datos)
+    conexion1.commit()
+    conexion1.close()    
 
 @mqtt.on_disconnect()
 def handle_disconnect(client, userdata, rc):
