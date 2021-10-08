@@ -4,7 +4,7 @@
 // Change the credentials below, so your ESP8266 connects to your router
 const char* ssid          = "IZZI-9146";      // RED DE INTERNET
 const char* password      = "F82DC0169146";   // CONTRASEÑA
-const char* mqtt_server   = "192.168.0.13";    // IP adress Raspberry Pi
+const char* mqtt_server   = "192.168.0.16";    // IP adress Raspberry Pi
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -106,9 +106,9 @@ void loop() {
     float temp2 = randomDouble(35.00, 39.00);
       float temp3 = randomDouble(35.00, 39.00);
          
-    snprintf (msg1, 100,"TEMP #%4.2f", temp1);
-    snprintf (msg2, 100, "HUMEDAD #%4.2f", temp2);
-    snprintf (msg3, 100, "OXIGENACION #%4.2f", temp3);
+    snprintf (msg1, 100,"TEMP %4.2f", temp1);
+    snprintf (msg2, 100, "HUMEDAD %4.2f", temp2);
+    snprintf (msg3, 100, "OXIGENACION %4.2f", temp3);
 
     Serial.println("Publish message: ");
     Serial.println(msg1);

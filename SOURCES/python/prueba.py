@@ -36,13 +36,7 @@ def handle_subscribe(client, userdata, mid, granted_qos):
 @mqtt.on_message()
 def handle_message(client, userdata, message):
     print('on_message client :  message.topic :{} message.payload :{}'.format(message.topic, message.payload.decode()))
-    cursor1=conexion1.cursor()
-    sql="insert into esp32_dht11(sensor,temperature,humidity) values (%s,%s,%s)"
-    datos=(0, 25,78)
-    cursor1.execute(sql, datos)
-    conexion1.commit()
-    conexion1.close()    
-
+  
 @mqtt.on_disconnect()
 def handle_disconnect(client, userdata, rc):
     print('on_disconnect client : {}'.format(client))
