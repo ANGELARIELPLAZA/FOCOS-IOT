@@ -4,7 +4,7 @@
 // Change the credentials below, so your ESP8266 connects to your router
 const char* ssid          = "IZZI-9146";      // RED DE INTERNET
 const char* password      = "F82DC0169146";   // CONTRASEÑA
-const char* mqtt_server   = "192.168.0.16";    // IP adress Raspberry Pi
+const char* mqtt_server   = "192.168.0.11";    // IP adress Raspberry Pi
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -12,6 +12,7 @@ long lastMsg = 0;
 char msg1[50];
 char msg2[50];
 char msg3[50];
+char msg4[50];
 
 int value = 0;
 
@@ -105,20 +106,22 @@ void loop() {
   float temp1 = randomDouble(35.00, 39.00);
     float temp2 = randomDouble(35.00, 39.00);
       float temp3 = randomDouble(35.00, 39.00);
-         
-    snprintf (msg1, 100,"TEMP %4.2f", temp1);
-    snprintf (msg2, 100, "HUMEDAD %4.2f", temp2);
-    snprintf (msg3, 100, "OXIGENACION %4.2f", temp3);
-
+         int temp4 = 0 ;
+    snprintf (msg1, 100," %4.2f",temp1);
+    snprintf (msg2, 100," %4.2f",temp2);
+    snprintf (msg3, 100," %4.2f",temp3);
+    snprintf (msg4, 100," %d",temp4);
     Serial.println("Publish message: ");
     Serial.println(msg1);
     Serial.println(msg2);
     Serial.println(msg3);
+    Serial.println(msg4);
     Serial.println(" ");
 
     
-    client.publish("outTopic", msg1);
-    client.publish("outTopic", msg2);
-    client.publish("outTopic", msg3);
+    client.publish("esp32/temperature", msg1);
+    client.publish("esp32/humedad", msg2);
+    client.publish("esp32/corriente", msg3);
+    client.publish("esp32/motor", msg4);
   }
 }
